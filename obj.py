@@ -1,3 +1,4 @@
+import random
 # class Player:
 #     pass    # pass does nothing in Python 
 
@@ -55,11 +56,36 @@ class Player:
         if self.health<=0:
             return True
         else:
-            return False
+            return False 
+    def healthString(self):
+        if self.health>=80:
+            return "Healthy"
+        elif self.health >= 70:
+            return "Stable"
+        elif self.health >=60:
+            return "Weak"
+        elif self.health >0:
+            return "Critical"
+        else:
+            return "Dead" 
+    def attack(self,target):
+        outcome = random.randint(1,2) 
+        if outcome==1:
+            damage= random.randint(5,20)
+            target.playerHurt(damage)
+            print(self.name,"attacked",target.name,
+                  "attacked succeeded with damage=",damage) 
+        else:
+            print(self.name,"attacked",target.name,
+                  "attack failed") 
 
-p1=Player("F",110)
-p2=Player("M",100)
-p1.playerHurt(20)
-p2.playerHurt(100)
-print(p1.isDead()) 
-print(p2.isDead())  
+
+
+p1=Player("F",110,"Carla","axe",40) 
+p2=Player("M",100,"Jake","sword",70)
+p3=Player("M",100,"Tom","knife",90) 
+players = [p1,p2,p3] 
+c = random.sample(players,2) 
+attacker=c[0] 
+target = c[1] 
+attacker.attack(target)  
